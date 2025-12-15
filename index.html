@@ -1,0 +1,92 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Posts Twitter/X para Instagram</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Bibliotecas via CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Sobre Itapevi</h1>
+        <div class="controls">
+            <div class="control-group">
+                <label for="profile-pic">Foto de Perfil:</label>
+                <input type="file" id="profile-pic" accept="image/*">
+            </div>
+            <div class="control-group">
+                <label for="post-text">Texto do Post:</label>
+                <textarea id="post-text" placeholder="Digite o texto do post..."></textarea>
+            </div>
+            <div class="control-group">
+                <label for="post-media">Mídia do Post (Imagem ou Vídeo MP4 - Obrigatório):</label>
+                <input type="file" id="post-media" accept="image/*,video/mp4">
+                <div id="image-controls" style="display: none;">
+                    <button id="crop-btn">Editar Imagem (Crop/Zoom/Reposicionar)</button>
+                </div>
+            </div>
+            <div class="control-group">
+                <label for="post-type">Tipo de Post (Opcional):</label>
+                <select id="post-type">
+                    <option value="">Nenhum</option>
+                    <option value="Fofoca">Fofoca</option>
+                    <option value="Notícia">Notícia</option>
+                    <option value="Política">Política</option>
+                    <option value="Esporte">Esporte</option>
+                    <option value="Entretenimento">Entretenimento</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label for="watermark-image">Marca d'Água (Opcional):</label>
+                <input type="file" id="watermark-image" accept="image/*">
+                <div id="watermark-controls" style="display: none;">
+                    <label><input type="checkbox" id="watermark-active"> Ativar Marca d'Água</label>
+                    <label>Tamanho: <input type="range" id="watermark-size" min="10" max="200" value="50"></label>
+                    <label>Opacidade: <input type="range" id="watermark-opacity" min="0.1" max="1" step="0.1" value="0.5"></label>
+                    <label>Posição:
+                        <select id="watermark-position">
+                            <option value="bottom-right">Canto Inferior Direito</option>
+                            <option value="bottom-left">Canto Inferior Esquerdo</option>
+                            <option value="top-right">Canto Superior Direito</option>
+                            <option value="top-left">Canto Superior Esquerdo</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+            <div class="control-group">
+                <label for="format-select">Formato:</label>
+                <select id="format-select">
+                    <option value="1:1">Feed Instagram (1:1 - 1080x1080)</option>
+                    <option value="16:9">16:9 - 1920x1080</option>
+                </select>
+            </div>
+        </div>
+        <div class="preview-container">
+            <div id="preview" class="twitter-card">
+                <div class="header">
+                    <img id="profile-img" src="" alt="Foto de Perfil">
+                    <div class="user-info">
+                        <div class="name">Sobre Itapevi <span id="type-display"></span></div>
+                        <div class="handle">@sobreitapevi</div>
+                    </div>
+                </div>
+                <div class="content">
+                    <div id="text-display"></div>
+                    <div class="media-container">
+                        <img id="post-img" src="" alt="Imagem do Post" style="display: none;">
+                        <video id="post-video" controls style="display: none; width: 100%; height: 100%; object-fit: cover;"></video>
+                        <img id="watermark-img" src="" alt="Marca d'Água" style="display: none;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button id="export-btn">Exportar PNG</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
